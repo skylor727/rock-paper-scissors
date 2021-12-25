@@ -36,7 +36,7 @@ async function handleChoice(evt) {
   }
 }
 
-async function renderImage() {
+ function renderImage() {
   imgEls[0].src = `${choices[playerCpu.player].imgPath}`;
   imgEls[1].src = `${choices[playerCpu.cpu].imgPath}`;
 }
@@ -55,11 +55,11 @@ function compareChoice(pChoice, cChoice) {
   scoreEls[1].innerHTML = playerCpu.ties;
 }
 
-async function playSound() {
+ function playSound() {
   const audio = new Audio("sounds/countdown.wav");
   audio.volume = 0.1;
   audio.play();
-  await sleep(3000);
+  return sleep(3000);
 }
 
 function sleep(ms) {
