@@ -1,5 +1,5 @@
 /*----- constants -----*/
-const playerCpu = {
+const gameState = {
   player: "1",
   cpu: "0",
   pWins: 0,
@@ -29,30 +29,30 @@ async function handleChoice(evt) {
   if (target === "R" || target === "P" || target === "S") {
     imgEls.forEach((el) => el.classList.remove("img-border"));
     await playSound();
-    playerCpu.player = evt.target.innerHTML;
-    playerCpu.cpu = "RPS".charAt(Math.floor(Math.random() * 3));
+    gameState.player = target;
+    gameState.cpu = "RPS".charAt(Math.floor(Math.random() * 3));
     renderImage();
-    compareChoice(playerCpu.player, playerCpu.cpu);
+    compareChoice(gameState.player, gameState.cpu);
   }
 }
 
  function renderImage() {
-  imgEls[0].src = `${choices[playerCpu.player].imgPath}`;
-  imgEls[1].src = `${choices[playerCpu.cpu].imgPath}`;
+  imgEls[0].src = `${choices[gameState.player].imgPath}`;
+  imgEls[1].src = `${choices[gameState.cpu].imgPath}`;
 }
 
 function compareChoice(pChoice, cChoice) {
   if (choices[pChoice].beats === cChoice) {
     imgEls[0].classList.add("img-border");
-    playerCpu.pWins++;
-    scoreEls[0].innerHTML = playerCpu.pWins;
+    gameState.pWins++;
+    scoreEls[0].innerHTML = gameState.pWins;
   } else if (choices[cChoice].beats === pChoice) {
     imgEls[1].classList.add("img-border");
-    playerCpu.cWins++;
-    scoreEls[2].innerHTML = playerCpu.cWins;
+    gameState.cWins++;
+    scoreEls[2].innerHTML = gameState.cWins;
   } else
-  playerCpu.ties++;
-  scoreEls[1].innerHTML = playerCpu.ties;
+  gameState.ties++;
+  scoreEls[1].innerHTML = gameState.ties;
 }
 
  function playSound() {
